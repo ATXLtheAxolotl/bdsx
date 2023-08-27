@@ -22,7 +22,7 @@ command
     )
     .overload(
         () => {
-            if (!storage.data.value) console.log(colors.green("Examples have been disabled, restart BDSX for effects to apply."));
+            if (storage.data.value) console.log(colors.green("Examples have been disabled, restart BDSX for effects to apply."));
             else console.log(colors.red("Examples have already been disabled."));
 
             storage.data.value = false;
