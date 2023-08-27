@@ -1,40 +1,33 @@
-// this is imported from ../index.ts
-// Console Output
-console.log("[example/index] Hello, World!");
+import { CommandPermissionLevel } from "bdsx/bds/command";
+import { storageManager } from "bdsx/storage";
+import { command } from "bdsx/command";
+import * as colors from "colors";
 
-import "./actor-effects";
-import "./attribute";
-import "./blockcustomname";
-import "./customcommand";
-import "./custommotd";
-import "./event-blockdestroy";
-import "./event-knockback";
-import "./event-playerdropitem";
-import "./executecommand";
-import "./form";
-import "./hidemapmarker";
-import "./inventory";
-import "./ipban";
-import "./lowlevel-apihooking";
-import "./lowlevel-asm";
-import "./lowlevel-dll";
-import "./lowlevel-nativeclass";
-import "./lowlevel-string-and-vector";
-import "./nbt-sign";
-import "./net-chat";
-import "./net-disconnect";
-import "./net-halfmove";
-import "./net-login";
-import "./net-ping";
-import "./net-printall";
-import "./net-rawpacket";
-import "./net-scorepacket";
-import "./net-sendhook";
-import "./net-transferserver";
-import "./setblock";
-import "./settitle";
-import "./simulatedplayer";
-import "./storage";
-import "./test";
-import "./vulnerabilities";
-// import './permissions';
+const storage = storageManager.getSync("examples");
+if (storage.data === undefined) storage.init({ value: true });
+else if (storage.data.value) require("./examples");
+
+command
+    .register("examples", "A command that allows users to enable/disable examples.", CommandPermissionLevel.Host)
+    .overload(
+        () => {
+            if (!storage.data.value) console.log(colors.green("Examples have been enabled, restart BDSX for effects to apply."));
+            else console.log(colors.red("Examples have already been enabled."));
+
+            storage.data.value = true;
+        },
+        {
+            option: command.enum("option.enable", "enable"),
+        },
+    )
+    .overload(
+        () => {
+            if (!storage.data.value) console.log(colors.green("Examples have been disabled, restart BDSX for effects to apply."));
+            else console.log(colors.red("Examples have already been disabled."));
+
+            storage.data.value = false;
+        },
+        {
+            option: command.enum("option.disable", "disable"),
+        },
+    );

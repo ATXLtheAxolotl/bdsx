@@ -10,6 +10,7 @@
         "install_bds": "ts-node ./bdsx/checkgate ./installer/installer ./bedrock_server",
         "lint-bdsx": "eslint bdsx --ext ts",
         "prettier-bdsx": "prettier --check .",
+        "prettier-fix": "prettier --write .",
         "tsc-no-emit": "tsc --noEmit",
         "watch": "tsc -w",
         "build": "tsc",

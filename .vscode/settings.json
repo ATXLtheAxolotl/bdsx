@@ -4,11 +4,13 @@
         "files.trimTrailingWhitespace": false
     },
     "files.exclude": {
-        "**/*.js": { "when": "$(basename).ts" }
+        "**/*.js": {
+            "when": "$(basename).ts"
+        }
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "[typescript]": {
-        "editor.formatOnSave": true
+        "editor.formatOnSave": false
     },
     "[json]": {
         "editor.formatOnSave": true
